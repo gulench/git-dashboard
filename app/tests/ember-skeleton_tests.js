@@ -1,6 +1,6 @@
-require('ember-skeleton/core');
+require('dashboard/core');
 
-module("ember-skeleton");
+module("dashboard");
 
 test("App is defined", function () {
   ok(typeof App !== 'undefined', "App is undefined");

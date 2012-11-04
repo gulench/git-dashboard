@@ -1,1 +1,1 @@
-require('ember-skeleton/controllers/application');
+require('dashboard/controllers/application');

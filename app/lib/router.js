@@ -1,4 +1,4 @@
-require('ember-skeleton/core');
+require('dashboard/core');
 
 App.Router = Ember.Router.extend({
   enableLogging: true,

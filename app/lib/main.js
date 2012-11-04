@@ -1,7 +1,7 @@
-require('ember-skeleton/core');
-require('ember-skeleton/store');
-require('ember-skeleton/router');
-require('ember-skeleton/controllers');
-require('ember-skeleton/views');
+require('dashboard/core');
+require('dashboard/store');
+require('dashboard/router');
+require('dashboard/controllers');
+require('dashboard/views');
 
 App.initialize();
