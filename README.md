@@ -1,7 +1,7 @@
-Ember Skeleton
-==============
+GitHub Dashboard
+================
 
-A skeleton application framework using Ember.js and Rake Pipeline.
+GitHub Dashboard using Ember.js and Rake Pipeline.
 
 Running
 -------
