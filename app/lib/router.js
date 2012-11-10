@@ -1,5 +1,5 @@
 require('dashboard/core');
-require('dashboard/github_data_source');
+require('dashboard/model');
 
 Dashboard.Router = Ember.Router.extend({
   //- enableLogging: true,
@@ -17,12 +17,15 @@ Dashboard.Router = Ember.Router.extend({
     user: Ember.Route.extend({
       route: '/:username',
       connectOutlets: function(router, context) {
-        var dataSource = Dashboard.GitHubDataSource.create();
+        var store = router.get('store');
+
+        var watchedRepositories = store.findQuery(Dashboard.Repository, {
+          username: context.username,
+          type: 'watched'
+        });
 
         var repositoriesController = router.get('repositoriesController');
-        repositoriesController.set('dataSource', dataSource);
-        repositoriesController.set('content', []);
-        repositoriesController.loadWatchedRepositories(context.username);
+        repositoriesController.set('content', watchedRepositories);
 
         router.get('applicationController').connectOutlet('repositories');
       }

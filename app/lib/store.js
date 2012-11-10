@@ -1,5 +1,7 @@
-// require('dashboard/core');
+require('dashboard/core');
+require('dashboard/github_data_source');
 
-// App.store = DS.Store.create({
-//   revision: 7
-// });
+Dashboard.Store = DS.Store.extend({
+  revision: 7,
+  adapter: Dashboard.GitHubDataSource.create()
+});

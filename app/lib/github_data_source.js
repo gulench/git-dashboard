@@ -1,6 +1,7 @@
 require('dashboard/core');
+require('dashboard/model');
 
-Dashboard.GitHubDataSource = Ember.Object.extend({
+Dashboard.GitHubDataSource = DS.Adapter.extend({
   PREFIX: 'https://api.github.com',
 
   ajax: function(url, target, callback) {
@@ -9,20 +10,30 @@ Dashboard.GitHubDataSource = Ember.Object.extend({
       dataType: 'jsonp',
       context: this,
       success: function(data) {
-        this._ajaxSuccess(target, callback, data);
+        this._ajaxSuccess(data, target, callback);
       }
     });
   },
 
-  _ajaxSuccess: function(target, callback, response) {
+  _ajaxSuccess: function(response, target, callback) {
     this._updateLimits(response);
-    Ember.tryInvoke(target, callback, [response.data]);
+    if (Ember.typeOf(target) === 'function') {
+      target.apply(this, [response.data]);
+    } else {
+      Ember.tryInvoke(target, callback, [response.data]);
+    }
   },
 
   _updateLimits: function(response) {
     if (response.meta) {
       this.set('remaining', response.meta['X-RateLimit-Remaining']);
       this.set('limit', response.meta['X-RateLimit-Limit']);
+    }
+  },
+
+  findQuery: function(store, type, query, modelArray) {
+    if (Dashboard.Repository.detect(type) && 'watched' == query.type) {
+      this.watchedRepositories(query.username, modelArray, 'load');
     }
   },
 
