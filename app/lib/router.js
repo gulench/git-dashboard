@@ -1,6 +1,6 @@
 require('dashboard/core');
 
-App.Router = Ember.Router.extend({
+Dashboard.Router = Ember.Router.extend({
   enableLogging: true,
 
   root: Ember.Route.extend({

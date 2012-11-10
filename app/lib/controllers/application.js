@@ -1,3 +1,3 @@
 require('dashboard/core');
 
-App.ApplicationController = Ember.Controller.extend();
+Dashboard.ApplicationController = Ember.Controller.extend();

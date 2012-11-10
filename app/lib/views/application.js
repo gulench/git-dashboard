@@ -1,5 +1,5 @@
 require('dashboard/core');
 
-App.ApplicationView = Ember.View.extend({
-  templateName: 'dashboard/~templates/application'
+Dashboard.ApplicationView = Ember.View.extend({
+  templateName: 'application'
 });

@@ -5,6 +5,6 @@ require('ember-data');
 require('dashboard/ext');
 require('dashboard/env');
 
-App = Ember.Application.create({
-  VERSION: '0.1'
+Dashboard = Ember.Application.create({
+  VERSION: '0.0.3'
 });

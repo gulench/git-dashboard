@@ -1,5 +1,5 @@
-require('dashboard/core');
+// require('dashboard/core');
 
-App.store = DS.Store.create({
-  revision: 7
-});
+// App.store = DS.Store.create({
+//   revision: 7
+// });
