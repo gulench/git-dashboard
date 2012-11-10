@@ -1,12 +1,12 @@
 require('dashboard/store');
 require('dashboard/model');
-require('dashboard/github_data_source');
+require('dashboard/github_adapter');
 
 var store, adapter;
 
-module("Dashboard.Store and Dashboard.GitHubDataSource integration tests", {
+module("Dashboard.Store and Dashboard.GitHubAdapter integration tests", {
   setup: function() {
-    adapter = Dashboard.GitHubDataSource.create();
+    adapter = Dashboard.GitHubAdapter.create();
     store = Dashboard.Store.create({ adapter: adapter });
   },
   teardown: function() {

@@ -1,4 +1,4 @@
-require('dashboard/github_data_source');
+require('dashboard/github_adapter');
 
 var get = Ember.get;
 
@@ -8,7 +8,7 @@ var dataSource;
 
 var setupDataSource = {
   setup: function() {
-    dataSource = Dashboard.GitHubDataSource.create({
+    dataSource = Dashboard.GitHubAdapter.create({
       ajax: function(url, target, callback) {
         ajaxCalled = true;
         ajaxParams = arguments;
@@ -25,7 +25,7 @@ var setupDataSource = {
   }
 };
 
-module("Dashboard.GitHubDataSource", setupDataSource);
+module("Dashboard.GitHubAdapter", setupDataSource);
 
 test("is defined", function() {
   ok(Dashboard.GitHubDataSource, "is defined");
@@ -88,7 +88,7 @@ test("_ajaxSuccess accepts function as target", function() {
   deepEqual(callbackResponse, {a: 1, b: 'hello'}, "data of response is passed to callback");
 });
 
-module("Dashboard.GitHubDataSource#watchedRepositories", setupDataSource);
+module("Dashboard.GitHubAdapter#watchedRepositories", setupDataSource);
 
 test("invokes ajax", function() {
   var target = {};

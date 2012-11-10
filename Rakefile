@@ -2,9 +2,14 @@ APPNAME = 'dashboard'
 
 require 'colored'
 require 'rake-pipeline'
+require 'versionomy'
 
 def pipeline
   Rake::Pipeline::Project.new('Assetfile')
+end
+
+def version
+  File.read("VERSION").strip
 end
 
 desc "Clean #{APPNAME}"
@@ -35,6 +40,26 @@ task :test => :build do
     puts "Tests Failed".red
     exit(1)
   end
+end
+
+desc "Bumps current version"
+task :bump_version do
+  next_version = Versionomy.parse(version).bump(:tiny)
+
+  print "Enter next version (#{next_version}): "
+  user_input = STDIN.gets.chomp
+  next_version = user_input unless user_input.empty?
+
+  File.open('VERSION', 'w') { |f| f.write( next_version ) }
+  system "git commit VERSION -m 'Bump to new version #{next_version}'"
+end
+
+desc "Tag current code with current version"
+task :release => :deploy do
+  system "git tag -a v#{version}"
+  system "git push --tag"
+
+  Rake::Task["bump_version"].invoke
 end
 
 desc "deploy app"
